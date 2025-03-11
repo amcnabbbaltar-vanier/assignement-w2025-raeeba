@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
     // ============================== Movement Settings ==============================
     [Header("Movement Settings")]
-    [SerializeField] private float baseWalkSpeed = 5f;    // Base speed when walking
+    [SerializeField] private float baseWalkSpeed = 4f;    // Base speed when walking
     [SerializeField] private float baseRunSpeed = 8f;     // Base speed when running
     [SerializeField] private float rotationSpeed = 10f;   // Speed at which the character rotates
 
