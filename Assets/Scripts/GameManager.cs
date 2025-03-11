@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private int score = 0;
+    public int score = 0;
     public int targetScore = 4; // score to reach before changing scenes
 
     void Awake()
