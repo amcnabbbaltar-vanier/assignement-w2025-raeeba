@@ -10,4 +10,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Replace with your scene name
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

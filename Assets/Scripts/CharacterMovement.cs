@@ -28,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
     private float boostedRunSpeed;
     private float speedBoostDuration = 5f;
     private bool isSpeedBoosted = false;
+    
 
 
 
@@ -200,8 +201,10 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void MoveCharacter()
     {
-        // Determine movement speed (walking or running)
-        float speed = isSpeedBoosted ? baseRunSpeed : baseWalkSpeed;
+        // Determine movement speed (walking, running or boosted speed)
+        // check if speed is boosted
+        // if not, check if character is holding the "Run" key
+        float speed = isSpeedBoosted ? boostedRunSpeed : (IsRunning ? baseRunSpeed : baseWalkSpeed);
         
         // Set ground speed value for animation purposes
         groundSpeed = (moveDirection != Vector3.zero) ? speed : 0.0f;
@@ -238,12 +241,12 @@ public class CharacterMovement : MonoBehaviour
 
     private IEnumerator SpeedBoostCoroutine()
     {
-        boostedRunSpeed = baseRunSpeed * speedMultiplier;
         isSpeedBoosted = true;
+        boostedRunSpeed = baseRunSpeed * speedMultiplier;
         yield return new WaitForSeconds(speedBoostDuration);
 
-        boostedRunSpeed = baseRunSpeed;
         isSpeedBoosted = false;
+        boostedRunSpeed = baseRunSpeed;
     }
 
     // ALTERNATIVE TO INVOKE ON SPAWNCOIN
