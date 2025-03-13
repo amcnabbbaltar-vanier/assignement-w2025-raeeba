@@ -13,17 +13,29 @@ public class ScoreController : MonoBehaviour
     void Start()
     {
         scorePanel.SetActive(true);
-        if(GameManager.Instance)
+        if (GameManager.Instance != null)
         {
+            // Initialize the score text when the scene starts
             scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+        }
+        else
+        {
+            Debug.LogError("GameManager.Instance is null. Make sure the GameManager is properly initialized.");
         }
     }
 
-    /*// Update is called once per frame
-    void Update()
+    public void UpdateScore()
     {
-        
-    }*/
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+            Debug.Log("Score was incremented in Score Controller: " + scoreText);
+        }
+        else
+        {
+            Debug.LogWarning("ScoreText is not assigned in ScoreController.");
+        }
+    }
 
     public void RestartGame()
     {

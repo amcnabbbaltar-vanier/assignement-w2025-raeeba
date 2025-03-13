@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
@@ -21,11 +22,12 @@ public class CharacterMovement : MonoBehaviour
     public float speedMultiplier = 1.0f; // Additional multiplier for character speed ( WINK WINK )
     
     
-    public Text scoreText;
-    private int score = 0;
     public float timer = 3.0f;
     public GameObject prefab;
     public GameManager gameManager;
+    private float boostedRunSpeed;
+    private float speedBoostDuration = 5f;
+    private bool isSpeedBoosted = false;
 
 
 
@@ -117,6 +119,10 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
+        } // Debugging
+        else if (Input.GetButtonDown("Run"))
+        {
+            Debug.Log("Run key pressed!");
         }
     }
 
@@ -195,7 +201,7 @@ public class CharacterMovement : MonoBehaviour
     private void MoveCharacter()
     {
         // Determine movement speed (walking or running)
-        float speed = IsRunning ? baseRunSpeed : baseWalkSpeed;
+        float speed = isSpeedBoosted ? baseRunSpeed : baseWalkSpeed;
         
         // Set ground speed value for animation purposes
         groundSpeed = (moveDirection != Vector3.zero) ? speed : 0.0f;
@@ -214,12 +220,30 @@ public class CharacterMovement : MonoBehaviour
     // when colliding with objects
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "ScorePickup")
+        if (other.gameObject.tag == "ScorePickup") // Green Pickups adds 50 points
         {
-            score += 50;
-            Debug.Log("Score: " + score);
+            GameManager.Instance.IncrementScore();
             Destroy(other.gameObject);
         }
+        else if (other.gameObject.tag == "SpeedPickup") // Orange Pickups increases movement speed
+        {
+            StartCoroutine(SpeedBoostCoroutine());
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "JumpPickup") // Blue Pickup enables double jump for 30 seconds
+        {
+
+        }
+    }
+
+    private IEnumerator SpeedBoostCoroutine()
+    {
+        boostedRunSpeed = baseRunSpeed * speedMultiplier;
+        isSpeedBoosted = true;
+        yield return new WaitForSeconds(speedBoostDuration);
+
+        boostedRunSpeed = baseRunSpeed;
+        isSpeedBoosted = false;
     }
 
     // ALTERNATIVE TO INVOKE ON SPAWNCOIN

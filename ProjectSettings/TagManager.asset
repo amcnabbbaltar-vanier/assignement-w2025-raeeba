@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collectible
   - ScorePickup
+  - SpeedPickup
+  - JumpPickup
   layers:
   - Default
   - TransparentFX

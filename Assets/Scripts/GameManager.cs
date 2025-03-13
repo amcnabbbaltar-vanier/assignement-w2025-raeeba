@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public int score = 0;
+    public ScoreController scoreController;
+    public int score;
 
     void Awake()
     {
@@ -23,8 +24,14 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore()
     {
-        score += 50;
-        Debug.Log("Score: " + score);
+        Debug.Log("Score is not being incremented in Game Manager. The score is: " + score);
+
+        if(scoreController != null)
+        {
+            score += 50;
+            scoreController.UpdateScore();
+            Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
+        }
     }
 
     // Update is called once per frame
