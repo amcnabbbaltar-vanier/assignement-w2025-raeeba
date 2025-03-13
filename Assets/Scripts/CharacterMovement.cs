@@ -1,5 +1,7 @@
 using UnityEngine;
 using Cinemachine;
+using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
@@ -17,6 +19,15 @@ public class CharacterMovement : MonoBehaviour
 
     // ============================== Modifiable from other scripts ==================
     public float speedMultiplier = 1.0f; // Additional multiplier for character speed ( WINK WINK )
+    
+    
+    public Text scoreText;
+    private int score = 0;
+    public float timer = 3.0f;
+    public GameObject prefab;
+    public GameManager gameManager;
+
+
 
     // ============================== Private Variables ==============================
     private Rigidbody rb; // Reference to the Rigidbody component
@@ -198,5 +209,37 @@ public class CharacterMovement : MonoBehaviour
 
         // Apply the new velocity directly
         rb.velocity = newVelocity;
+    }
+
+    // when colliding with objects
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "ScorePickup")
+        {
+            score += 50;
+            Debug.Log("Score: " + score);
+            Destroy(other.gameObject);
+        }
+    }
+
+    // ALTERNATIVE TO INVOKE ON SPAWNCOIN
+    public void SpawnCoinWithTimer()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0.0f)
+        {
+            SpawnCoin();
+            timer = 3.0f;
+        }
+    }
+      
+    // METHOD THAT SPAWNS THE COINS 
+    public void SpawnCoin()
+    {
+        Vector3 randomVector = new Vector3(Random.Range(-25.0f,25.0f),0.0f, Random.Range(-25.0f,25.0f)); 
+
+        GameObject spawnObject = Instantiate(prefab,randomVector,Quaternion.identity);
+
+        Destroy(spawnObject, 3.0f);
     }
 }

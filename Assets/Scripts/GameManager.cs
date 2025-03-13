@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int score = 0;
-    public int targetScore = 4; // score to reach before changing scenes
 
     void Awake()
     {
@@ -24,13 +23,8 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore()
     {
-        score++;
+        score += 50;
         Debug.Log("Score: " + score);
-
-        /*if(score >= targetScore)
-        {
-            LoadNextScene();
-        }*/
     }
 
     // Update is called once per frame
