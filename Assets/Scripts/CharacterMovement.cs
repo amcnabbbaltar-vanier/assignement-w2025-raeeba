@@ -3,6 +3,7 @@ using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
@@ -28,6 +29,7 @@ public class CharacterMovement : MonoBehaviour
     private float boostedRunSpeed;
     private float speedBoostDuration = 5f;
     private bool isSpeedBoosted = false;
+    public static CharacterMovement Instance;
     
 
 
@@ -67,6 +69,15 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         InitializeComponents(); // Initialize Rigidbody and Camera reference
+
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+        } else 
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -236,6 +247,10 @@ public class CharacterMovement : MonoBehaviour
         else if (other.gameObject.tag == "JumpPickup") // Blue Pickup enables double jump for 30 seconds
         {
 
+        }
+        else if (other.gameObject.tag == "Flag")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         }
     }
 

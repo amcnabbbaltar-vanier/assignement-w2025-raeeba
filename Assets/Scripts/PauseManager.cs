@@ -7,7 +7,22 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
+    public PauseManager Instance;
 
+
+    void Start()
+    {
+        //scorePanel.SetActive(true);
+        if(Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {

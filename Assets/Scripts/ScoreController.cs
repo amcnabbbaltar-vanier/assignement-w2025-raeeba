@@ -8,20 +8,31 @@ public class ScoreController : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public GameObject scorePanel;
+    public ScoreController Instance;
 
     // Start is called before the first frame update
     void Start()
     {
         scorePanel.SetActive(true);
-        if (GameManager.Instance != null)
+        if(Instance == null)
         {
-            // Initialize the score text when the scene starts
-            scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+            if (GameManager.Instance != null)
+            {
+                // Initialize the score text when the scene starts
+                scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+            }
+            else
+            {
+                //Debug.LogError("GameManager.Instance is null. Make sure the GameManager is properly initialized.");
+            }
         }
-        else
+        else 
         {
-            Debug.LogError("GameManager.Instance is null. Make sure the GameManager is properly initialized.");
+            Destroy(gameObject);
         }
+        
     }
 
     public void UpdateScore()
