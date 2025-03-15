@@ -8,13 +8,13 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    // score
     public ScoreController scoreController;
     public int score;
 
     // time
     public TimerController timerController;
-    //public int time;
-    // public Text timerText;
     public float secondsCount;
     public int minuteCount;
 
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // The DontDestroyOnLoad  will make sure the game manager stays active between scene loading.
+            DontDestroyOnLoad(gameObject); 
         } else 
         {
             Destroy(gameObject);
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        IncrementTimer();
+        IncrementTimer(); // increment timer every frame
     } 
 
     public void IncrementTimer()

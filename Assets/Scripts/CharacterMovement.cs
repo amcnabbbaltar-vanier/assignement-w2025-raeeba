@@ -30,6 +30,10 @@ public class CharacterMovement : MonoBehaviour
     private float speedBoostDuration = 5f;
     private bool isSpeedBoosted = false;
     public static CharacterMovement Instance;
+    public CharacterHealth characterHealth;
+    private int jumpCount = 0;
+    private bool canDoubleJump = false;
+    private float jumpBoostDuration = 30f;
     
 
 
@@ -186,10 +190,21 @@ public class CharacterMovement : MonoBehaviour
     private void HandleJump()
     {
         // Apply jump force only if jump was requested and the character is grounded
-        if (jumpRequest && IsGrounded)
+        if (jumpRequest)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
-            jumpRequest = false; // Reset jump request after applying jump
+            if (IsGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
+                jumpCount = 1;
+                // Reset jump request after applying jump
+            }
+            else if (jumpCount == 1 && canDoubleJump)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                jumpCount = 2;
+                //anim.SetTrigger("Flip");
+            }
+            jumpRequest = false;
         }
     }
 
@@ -246,7 +261,14 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "JumpPickup") // Blue Pickup enables double jump for 30 seconds
         {
-
+            StartCoroutine(DoubleJumpCoroutine());
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Trap")
+        {
+            characterHealth.TakeDamage(1);
+            Debug.Log("Trap touched");
+            Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Flag")
         {
@@ -259,30 +281,17 @@ public class CharacterMovement : MonoBehaviour
     {
         isSpeedBoosted = true;
         boostedRunSpeed = baseRunSpeed * speedMultiplier;
+        
         yield return new WaitForSeconds(speedBoostDuration);
 
         isSpeedBoosted = false;
         boostedRunSpeed = baseRunSpeed;
     }
 
-    // ALTERNATIVE TO INVOKE ON SPAWNCOIN
-    public void SpawnCoinWithTimer()
+    private IEnumerator DoubleJumpCoroutine()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0.0f)
-        {
-            SpawnCoin();
-            timer = 3.0f;
-        }
-    }
-      
-    // METHOD THAT SPAWNS THE COINS 
-    public void SpawnCoin()
-    {
-        Vector3 randomVector = new Vector3(Random.Range(-25.0f,25.0f),0.0f, Random.Range(-25.0f,25.0f)); 
-
-        GameObject spawnObject = Instantiate(prefab,randomVector,Quaternion.identity);
-
-        Destroy(spawnObject, 3.0f);
+        canDoubleJump = true;
+        yield return new WaitForSeconds(jumpBoostDuration);
+        canDoubleJump = false;
     }
 }

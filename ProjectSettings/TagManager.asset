@@ -9,6 +9,7 @@ TagManager:
   - SpeedPickup
   - JumpPickup
   - Flag
+  - Trap
   layers:
   - Default
   - TransparentFX

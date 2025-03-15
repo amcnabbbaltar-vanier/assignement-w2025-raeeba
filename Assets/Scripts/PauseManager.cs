@@ -7,14 +7,14 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
-    public PauseManager Instance;
+    public static PauseManager Instance;
 
 
     void Start()
     {
-        //scorePanel.SetActive(true);
         if(Instance == null)
         {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -23,7 +23,7 @@ public class PauseManager : MonoBehaviour
         }
         
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -41,20 +41,40 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        // show Pause Menu UI
-        pauseMenuPanel.SetActive(true);
-        // freeze game time
-        Time.timeScale = 0f;
-        isPaused = true;
+        // // show Pause Menu UI
+        // pauseMenuPanel.SetActive(true);
+        // // freeze game time
+        // Time.timeScale = 0f;
+        // isPaused = true;
+        if (pauseMenuPanel != null)
+        {
+            pauseMenuPanel.SetActive(true); // Show the pause menu
+            Time.timeScale = 0f; // Freeze the game time
+            isPaused = true;
+        }
+        else
+        {
+            Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
+        }
     }
 
     public void ResumeGame()
     {
-        // hide Pause Menu UI
-        pauseMenuPanel.SetActive(false);
-        // unfreeze game time
-        Time.timeScale = 1f;
-        isPaused = false;
+        // // hide Pause Menu UI
+        // pauseMenuPanel.SetActive(false);
+        // // unfreeze game time
+        // Time.timeScale = 1f;
+        // isPaused = false;
+        if (pauseMenuPanel != null)
+        {
+            pauseMenuPanel.SetActive(false); // Hide the pause menu
+            Time.timeScale = 1f; // Unfreeze the game time
+            isPaused = false;
+        }
+        else
+        {
+            Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
+        }
     }
 
     public void QuitGame()
