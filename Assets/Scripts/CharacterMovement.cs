@@ -250,7 +250,8 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "Flag")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+            SceneManager.LoadScene("SecondLevel"); 
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         }
     }
 
