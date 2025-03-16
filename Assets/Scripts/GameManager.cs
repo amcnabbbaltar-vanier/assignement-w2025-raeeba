@@ -8,6 +8,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public Canvas statsCanvas;
+    public Canvas pauseMenuCanvas;
 
     // score
     public ScoreController scoreController;
@@ -17,17 +19,54 @@ public class GameManager : MonoBehaviour
     public TimerController timerController;
     public float secondsCount;
     public int minuteCount;
+    public Camera playerCamera;
+    public Cinemachine.CinemachineFreeLook freeLookCamera;
+    private Transform playerTransform; 
 
     void Awake()
     {
-        // singleton pattern
-        if(Instance == null)
+        // Singleton pattern
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
-        } else 
+            DontDestroyOnLoad(gameObject);  
+
+            if (statsCanvas != null)
+            {
+                DontDestroyOnLoad(statsCanvas.gameObject);  
+            }
+            if (pauseMenuCanvas != null)
+            {
+                DontDestroyOnLoad(pauseMenuCanvas.gameObject);  
+            }
+            if (playerCamera != null)
+            {
+                DontDestroyOnLoad(playerCamera.gameObject); // Make the Camera persist across scenes
+            }
+             if (freeLookCamera != null)
+            {
+                // You could apply DontDestroyOnLoad() to this camera as well if you want it to persist
+                DontDestroyOnLoad(freeLookCamera.gameObject);
+            }
+            else
+            {
+                //Debug.LogError("Canvas is null.");
+            }
+        }
+        else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
+        }
+    }
+
+        void Start()
+    {
+        // Optionally, reassign the target after loading the new scene
+        if (freeLookCamera != null && playerTransform != null)
+        {
+            // Reassign the Follow and LookAt targets of the FreeLook Camera
+            freeLookCamera.Follow = playerTransform;
+            freeLookCamera.LookAt = playerTransform;
         }
     }
 
@@ -58,7 +97,7 @@ public class GameManager : MonoBehaviour
         {
             score += 50;
             scoreController.UpdateScore();
-            //Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
+            Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
         }
     }
 

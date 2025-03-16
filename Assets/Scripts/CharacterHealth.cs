@@ -16,16 +16,15 @@ public class CharacterHealth : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            currentHealth = maxHealth;
-            healthBar.maxValue = maxHealth;
-            healthBar.value = currentHealth;
-            DontDestroyOnLoad(gameObject); // The DontDestroyOnLoad  will make sure the game manager stays active between scene loading.
+            //DontDestroyOnLoad(gameObject); // The DontDestroyOnLoad  will make sure the game manager stays active between scene loading.
         } else 
         {
             Destroy(gameObject);
         }
 
-        
+        currentHealth = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
     }
 
     // Update is called once per frame
@@ -40,16 +39,16 @@ public class CharacterHealth : MonoBehaviour
         healthBar.value = currentHealth;
         if(currentHealth <= 0)
         {
-            Die();
+            //Die();
         }
     }
 
-    public void Die()
+    /*public void Die()
     {
         if (GameManager.Instance != null)
         {
             GameManager.Instance.IncrementScore();
             GameManager.Instance.LoadNextScene();
         }
-    }
+    }*/
 }

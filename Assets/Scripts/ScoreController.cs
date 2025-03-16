@@ -18,16 +18,16 @@ public class ScoreController : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); 
+            
             if (GameManager.Instance != null)
             {
-                // Initialize the score text when the scene starts
-                scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+                scoreText.text = "Score: " + GameManager.Instance.score;
             }
             else
             {
-                //Debug.LogError("GameManager.Instance is null. Make sure the GameManager is properly initialized.");
+                Debug.LogError("GameManager.Instance is null.");
             }
-        }
+        } 
         else 
         {
             Destroy(gameObject);

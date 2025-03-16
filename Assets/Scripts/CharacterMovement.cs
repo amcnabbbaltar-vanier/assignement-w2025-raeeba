@@ -24,16 +24,14 @@ public class CharacterMovement : MonoBehaviour
     
     
     public float timer = 3.0f;
-    public GameObject prefab;
-    public GameManager gameManager;
     private float boostedRunSpeed;
     private float speedBoostDuration = 5f;
     private bool isSpeedBoosted = false;
-    public static CharacterMovement Instance;
     public CharacterHealth characterHealth;
     private int jumpCount = 0;
     private bool canDoubleJump = false;
     private float jumpBoostDuration = 30f;
+    private AnimatorController animatorController;
     
 
 
@@ -73,15 +71,6 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         InitializeComponents(); // Initialize Rigidbody and Camera reference
-
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); 
-        } else 
-        {
-            Destroy(gameObject);
-        }
     }
 
     /// <summary>
@@ -272,8 +261,8 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "Flag")
         {
-            SceneManager.LoadScene("SecondLevel"); 
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+            //SceneManager.LoadScene("SecondLevel"); 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         }
     }
 

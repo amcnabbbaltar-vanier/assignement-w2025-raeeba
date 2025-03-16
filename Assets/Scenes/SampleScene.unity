@@ -364,11 +364,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01f5dd022f995a4d9567e4f13c7bdca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsCanvas: {fileID: 2126115189}
+  pauseMenuCanvas: {fileID: 281615385}
   scoreController: {fileID: 45902534}
   score: 0
   timerController: {fileID: 45902535}
   secondsCount: 0
   minuteCount: 0
+  playerCamera: {fileID: 662214154}
+  freeLookCamera: {fileID: 1382441946}
 --- !u!4 &45902532
 Transform:
   m_ObjectHideFlags: 0
@@ -427,32 +431,6 @@ MonoBehaviour:
   timerText: {fileID: 1532059516}
   timerPanel: {fileID: 1034617052}
   Instance: {fileID: 0}
---- !u!1 &48553277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2900693857976894741, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
-  m_PrefabInstance: {fileID: 362941290}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &48553278
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48553277}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.50000006
-  m_Center: {x: 0, y: 0.00000011920929, z: 0}
 --- !u!1 &133771244
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,10 +599,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2900693857976894741, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 475155343}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
 --- !u!1 &165560885
 GameObject:
@@ -1247,7 +1222,7 @@ GameObject:
   - component: {fileID: 281615384}
   - component: {fileID: 281615383}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: PauseMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1399,10 +1374,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2900693857976894741, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 48553278}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
 --- !u!1 &391228936
 GameObject:
@@ -1778,32 +1750,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &475155342 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2900693857976894741, guid: b4dbc270c362baa4ab1ac3cb9abf18ab, type: 3}
-  m_PrefabInstance: {fileID: 136435199}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &475155343
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475155342}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.50000006
-  m_Center: {x: 0, y: 0.00000011920929, z: 0}
 --- !u!1001 &514412845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2367,6 +2313,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &662214154 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6165220391726020258, guid: 1dcde4e7f11541044ac45a5b849ee512, type: 3}
+  m_PrefabInstance: {fileID: 790232735713459837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5947,7 +5898,7 @@ GameObject:
   - component: {fileID: 2126115188}
   - component: {fileID: 2126115187}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: StatsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6108,11 +6059,11 @@ PrefabInstance:
       objectReference: {fileID: 2092826203}
     - target: {fileID: 2406797382554296839, guid: 8af2a2233a1ded941ae0d5ec41703e1e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97410536
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2406797382554296839, guid: 8af2a2233a1ded941ae0d5ec41703e1e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22609453
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4226583587809762496, guid: 8af2a2233a1ded941ae0d5ec41703e1e, type: 3}
       propertyPath: m_Follow

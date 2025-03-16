@@ -12,26 +12,30 @@ public class TimerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-        timerPanel.SetActive(true);
-        if(Instance == null)
+{   
+    timerPanel.SetActive(true);
+
+    // Singleton 
+    if (Instance == null)
+    {
+        Instance = this;  
+        DontDestroyOnLoad(gameObject);  
+        
+        if (GameManager.Instance != null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); 
-            if (GameManager.Instance != null)
-            {
-                timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
-            }
-            else
-            {
-                //Debug.LogError("GameManager.Instance is null. Make sure the GameManager is properly initialized.");
-            }
-        } 
-        else 
-        {
-            Destroy(gameObject);
+            timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
         }
+            else
+        {
+            Debug.LogError("GameManager.Instance is null.");
+        }
+    } 
+    else 
+    {
+        Destroy(gameObject);
     }
+}
+
 
     // Update is called once per frame
     public void UpdateTimer()
