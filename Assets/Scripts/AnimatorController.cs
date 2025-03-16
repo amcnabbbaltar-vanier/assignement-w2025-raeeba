@@ -26,8 +26,9 @@ public class AnimatorController : MonoBehaviour
         animator.SetFloat("CharacterSpeed", rb.velocity.magnitude);
         animator.SetBool("IsGrounded", characterMovement.IsGrounded);
        
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetKeyDown(KeyCode.Space) && characterMovement.jumpCount == 2)
         {
+            // Trigger the flip animation when the player double jumps
             animator.SetTrigger("doFlip");
         }
     }

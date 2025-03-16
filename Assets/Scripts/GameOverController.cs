@@ -9,21 +9,22 @@ public class GameOverController : MonoBehaviour
     public GameObject gameOverPanel;
     public TextMeshProUGUI finalTimerText;
     public TextMeshProUGUI finalScoreText;
-    // Start is called before the first frame update
+   
     void Start()
     {
-        gameOverPanel.SetActive(true);
-        if (GameManager.Instance)
+        gameOverPanel.SetActive(true); // make gameOver panel visible
+        if (GameManager.Instance) 
         {
             finalScoreText.text = "Score: " + GameManager.Instance.score.ToString();
             finalTimerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
         }
     }
 
+    // restart game
     public void RestartGame()
     {
         gameOverPanel.SetActive(false);
-        GameManager.Instance.ResetStats();
-        SceneManager.LoadScene("SampleScene"); 
+        GameManager.Instance.ResetStats(); // reset score and time
+        SceneManager.LoadScene("SampleScene"); // load first level
     }
 }

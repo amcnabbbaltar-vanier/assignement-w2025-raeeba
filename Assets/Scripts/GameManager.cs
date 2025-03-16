@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);  
 
-            if (statsCanvas != null)
+            if (statsCanvas != null) // score and timer 
             {
                 DontDestroyOnLoad(statsCanvas.gameObject);  
             } 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(statsCanvas.gameObject); 
             }
-            if (pauseMenuCanvas != null)
+            if (pauseMenuCanvas != null) // pause menu
             {
                 DontDestroyOnLoad(pauseMenuCanvas.gameObject);  
             }
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(pauseMenuCanvas.gameObject); 
             }
-            if (playerCamera != null)
+            if (playerCamera != null) // player camera
             {
                 DontDestroyOnLoad(playerCamera.gameObject); 
             }
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(playerCamera.gameObject); 
             }
-             if (freeLookCamera != null)
+             if (freeLookCamera != null) // free look camera
             {
                 DontDestroyOnLoad(freeLookCamera.gameObject);
             }
@@ -75,12 +75,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //! TO SEE
     void Start()
     {
-        // Optionally, reassign the target after loading the new scene
+        // assign  the player subject to the free look camera
         if (freeLookCamera != null && playerTransform != null)
         {
-            // Reassign the Follow and LookAt targets of the FreeLook Camera
             freeLookCamera.Follow = playerTransform;
             freeLookCamera.LookAt = playerTransform;
         }
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         // healthBar.value = currentHealth;
     }
 
+    // reset score and time
     public void ResetStats()
     {
         score = 0;
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
         IncrementTimer(); // increment timer every frame
     } 
 
+    // increment time
     public void IncrementTimer()
     {
         if(timerController != null)
@@ -119,6 +121,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // increment score
     public void IncrementScore()
     {
 
@@ -145,6 +148,7 @@ public class GameManager : MonoBehaviour
     //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
     // }
 
+    // load the next scene
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

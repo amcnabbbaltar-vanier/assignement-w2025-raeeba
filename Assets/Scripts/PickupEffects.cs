@@ -10,30 +10,32 @@ public class PickupEffects : MonoBehaviour
     private Vector3 startPosition;
     public ParticleSystem collisionEffect;
 
-    // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
     }
 
-    // Update is called once per frame
+    // make game objects hover and rotate
     void Update()
     {
         Hover();
         Rotate();
     }
 
+    // make game object hover
     void Hover()
     {
         float newY = Mathf.Sin(Time.time * hoverSpeed) * hoverHeight;
         transform.position = new Vector3(startPosition.x, startPosition.y + newY, startPosition.z);
     }
 
+    //  make game object rotate
     void Rotate()
     {
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 
+    // on collision with player, play particle effects
     public void OnCollisionEnter(Collision other)
     {
         

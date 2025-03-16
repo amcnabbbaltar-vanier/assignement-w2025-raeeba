@@ -8,7 +8,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
     public static PauseManager Instance;
-    //public static CharacterHealth characterHealth;
 
 
     void Start()
@@ -25,6 +24,7 @@ public class PauseManager : MonoBehaviour
         
     }
 
+    // check if game is paused or not
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -40,6 +40,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    // show pause menu
     public void PauseGame()
     {
         // show Pause Menu UI
@@ -59,6 +60,7 @@ public class PauseManager : MonoBehaviour
         // }
     }
 
+    // resume playing the game
     public void ResumeGame()
     {
         // hide Pause Menu UI
@@ -78,17 +80,18 @@ public class PauseManager : MonoBehaviour
         // }
     }
 
+    // restart level
     public void RestartLevel()
     {
         GameManager.Instance.ResetStats();
         //characterHealth.Instance.ResetHealth();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // reload current level
     }
 
 
+    // quit game
     public void QuitGame()
     {
         Application.Quit();
-        //SceneManager.LoadScene("MainMenu");
     }
 }

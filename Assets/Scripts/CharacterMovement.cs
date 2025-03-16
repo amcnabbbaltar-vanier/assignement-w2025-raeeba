@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
     private float speedBoostDuration = 5f;
     private bool isSpeedBoosted = false;
     public CharacterHealth characterHealth;
-    private int jumpCount = 0;
+    public int jumpCount = 0;
     private bool canDoubleJump = false;
     private float jumpBoostDuration = 30f;
     
@@ -177,20 +177,18 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void HandleJump()
     {
-        // Apply jump force only if jump was requested and the character is grounded
+        // if jump is requested and character is grounded, allow jump
         if (jumpRequest)
         {
             if (IsGrounded)
             {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
                 jumpCount = 1;
-                // Reset jump request after applying jump
             }
-            else if (jumpCount == 1 && canDoubleJump)
+            else if (jumpCount == 1 && canDoubleJump) // if player presses space bar twice and has JumpPickup, allow double jump
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 jumpCount = 2;
-                //anim.SetTrigger("Flip");
             }
             jumpRequest = false;
         }
@@ -234,7 +232,7 @@ public class CharacterMovement : MonoBehaviour
         rb.velocity = newVelocity;
     }
 
-    // when colliding with objects
+    // when colliding with other game objects
     public void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "ScorePickup") // Green Pickups adds 50 points
@@ -252,34 +250,35 @@ public class CharacterMovement : MonoBehaviour
             StartCoroutine(DoubleJumpCoroutine());
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "Trap")
+        else if (other.gameObject.tag == "Trap") // Red Traps reduce health by 1 point
         {
             characterHealth.TakeDamage(1);
             Debug.Log("Trap touched");
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "Flag")
+        else if (other.gameObject.tag == "Flag") // Flags being player to next level
         {
-            //SceneManager.LoadScene("SecondLevel"); 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         }
     }
 
+    // handle speed boost
     private IEnumerator SpeedBoostCoroutine()
     {
         isSpeedBoosted = true;
         boostedRunSpeed = baseRunSpeed * speedMultiplier;
         
-        yield return new WaitForSeconds(speedBoostDuration);
+        yield return new WaitForSeconds(speedBoostDuration); // speed boost for 5 seconds
 
         isSpeedBoosted = false;
         boostedRunSpeed = baseRunSpeed;
     }
 
+    // handle double jump
     private IEnumerator DoubleJumpCoroutine()
     {
         canDoubleJump = true;
-        yield return new WaitForSeconds(jumpBoostDuration);
+        yield return new WaitForSeconds(jumpBoostDuration); // jump boost for 30 seconds
         canDoubleJump = false;
     }
 }

@@ -10,34 +10,33 @@ public class TimerController : MonoBehaviour
     public GameObject timerPanel;
     public TimerController Instance;
 
-    // Start is called before the first frame update
     void Start()
-{   
-    timerPanel.SetActive(true);
+    {   
+        timerPanel.SetActive(true); // show timer panel
 
-    // Singleton 
-    if (Instance == null)
-    {
-        Instance = this;  
-        DontDestroyOnLoad(gameObject);  
-        
-        if (GameManager.Instance != null)
+        // Singleton 
+        if (Instance == null)
         {
-            timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
-        }
-            else
+            Instance = this;  
+            DontDestroyOnLoad(gameObject);  
+            
+            if (GameManager.Instance != null)
+            {
+                timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
+            }
+                else
+            {
+                Debug.LogError("GameManager.Instance is null.");
+            }
+        } 
+        else 
         {
-            Debug.LogError("GameManager.Instance is null.");
+            Destroy(gameObject);
         }
-    } 
-    else 
-    {
-        Destroy(gameObject);
     }
-}
 
 
-    // Update is called once per frame
+    // update timer based on game manager
     public void UpdateTimer()
     {
         if (timerText != null)
@@ -47,12 +46,7 @@ public class TimerController : MonoBehaviour
         }
         else
         {
-            //Debug.LogWarning("TimerText is not assigned in TimerController.");
+            Debug.LogWarning("TimerText is not assigned in TimerController.");
         }
     }
-
-    // public void RestartGame()
-    // {
-    //     SceneManager.LoadScene(0);
-    // }
 }

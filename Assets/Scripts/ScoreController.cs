@@ -10,10 +10,9 @@ public class ScoreController : MonoBehaviour
     public GameObject scorePanel;
     public ScoreController Instance;
 
-    // Start is called before the first frame update
     void Start()
     {
-        scorePanel.SetActive(true);
+        scorePanel.SetActive(true); // show score panel
         if(Instance == null)
         {
             Instance = this;
@@ -35,12 +34,13 @@ public class ScoreController : MonoBehaviour
         
     }
 
+    // update score based on game manager
     public void UpdateScore(int score)
     {
         if (scoreText != null)
         {
             scoreText.text = "Score: " + GameManager.Instance.score.ToString();
-            Debug.Log("Score was incremented in Score Controller: " + scoreText);
+            //Debug.Log("Score was incremented in Score Controller: " + scoreText);
         }
         else
         {

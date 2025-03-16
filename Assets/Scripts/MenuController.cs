@@ -5,20 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // start game
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // load first level (sample scene)
     }
 
+    // quit game
     public void QuitGame()
     {
         Application.Quit();
     }
-
-    /*public void RestartGame()
-    {
-        GameManager.Instance.ResetStats();
-        SceneManager.LoadScene("SampleScene"); 
-    }*/
 }
