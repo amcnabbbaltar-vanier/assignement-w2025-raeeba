@@ -52,22 +52,6 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(pauseMenuCanvas.gameObject); 
             }
-            if (playerCamera != null) // player camera
-            {
-                DontDestroyOnLoad(playerCamera.gameObject); 
-            }
-            else
-            {
-                Destroy(playerCamera.gameObject); 
-            }
-             if (freeLookCamera != null) // free look camera
-            {
-                DontDestroyOnLoad(freeLookCamera.gameObject);
-            }
-            else
-            {
-                Destroy(freeLookCamera.gameObject); 
-            }
         }
         else
         {
@@ -75,7 +59,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //! TO SEE
     void Start()
     {
         // assign  the player subject to the free look camera
@@ -84,10 +67,6 @@ public class GameManager : MonoBehaviour
             freeLookCamera.Follow = playerTransform;
             freeLookCamera.LookAt = playerTransform;
         }
-
-        // currentHealth = maxHealth;
-        // healthBar.maxValue = maxHealth;
-        // healthBar.value = currentHealth;
     }
 
     // reset score and time

@@ -123,11 +123,7 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
-        } // Debugging
-        else if (Input.GetButtonDown("Run"))
-        {
-            Debug.Log("Run key pressed!");
-        }
+        } 
     }
 
     // ============================== Movement Handling ==============================

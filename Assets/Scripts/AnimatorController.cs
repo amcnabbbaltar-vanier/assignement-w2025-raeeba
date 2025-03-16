@@ -7,6 +7,7 @@ public class AnimatorController : MonoBehaviour
     private Animator animator;
     private CharacterMovement characterMovement;
     private Rigidbody rb;
+     public ParticleSystem doubleJumpEffect;
 
     public void Start()
     {
@@ -30,6 +31,8 @@ public class AnimatorController : MonoBehaviour
         {
             // Trigger the flip animation when the player double jumps
             animator.SetTrigger("doFlip");
+            doubleJumpEffect.Play();
+            
         }
     }
 }

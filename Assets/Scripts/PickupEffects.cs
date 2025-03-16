@@ -42,7 +42,7 @@ public class PickupEffects : MonoBehaviour
         if (other.gameObject.tag == "Player") 
         {
             collisionEffect.Play();
-            Debug.Log("Player collided with pickup!");
+            //Debug.Log("Player collided with pickup!");
         }
     }
 }
