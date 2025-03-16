@@ -34,23 +34,34 @@ public class GameManager : MonoBehaviour
             if (statsCanvas != null)
             {
                 DontDestroyOnLoad(statsCanvas.gameObject);  
+            } 
+            else
+            {
+                Destroy(statsCanvas.gameObject); 
             }
             if (pauseMenuCanvas != null)
             {
                 DontDestroyOnLoad(pauseMenuCanvas.gameObject);  
             }
+            else
+            {
+                Destroy(pauseMenuCanvas.gameObject); 
+            }
             if (playerCamera != null)
             {
-                DontDestroyOnLoad(playerCamera.gameObject); // Make the Camera persist across scenes
+                DontDestroyOnLoad(playerCamera.gameObject); 
+            }
+            else
+            {
+                Destroy(playerCamera.gameObject); 
             }
              if (freeLookCamera != null)
             {
-                // You could apply DontDestroyOnLoad() to this camera as well if you want it to persist
                 DontDestroyOnLoad(freeLookCamera.gameObject);
             }
             else
             {
-                //Debug.LogError("Canvas is null.");
+                Destroy(freeLookCamera.gameObject); 
             }
         }
         else
@@ -68,6 +79,13 @@ public class GameManager : MonoBehaviour
             freeLookCamera.Follow = playerTransform;
             freeLookCamera.LookAt = playerTransform;
         }
+    }
+
+    public void ResetStats()
+    {
+        score = 0;
+        minuteCount = 0;
+        secondsCount = 0;
     }
 
     void Update()

@@ -15,4 +15,9 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("SampleScene"); 
+    }
 }

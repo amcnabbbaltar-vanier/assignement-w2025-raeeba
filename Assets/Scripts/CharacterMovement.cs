@@ -31,7 +31,6 @@ public class CharacterMovement : MonoBehaviour
     private int jumpCount = 0;
     private bool canDoubleJump = false;
     private float jumpBoostDuration = 30f;
-    private AnimatorController animatorController;
     
 
 

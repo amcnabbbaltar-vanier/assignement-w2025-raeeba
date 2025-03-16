@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterHealth : MonoBehaviour
 {
@@ -33,22 +34,23 @@ public class CharacterHealth : MonoBehaviour
         
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.value = currentHealth;
         if(currentHealth <= 0)
         {
-            //Die();
+            Die();
         }
     }
 
-    /*public void Die()
+    public void Die()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.IncrementScore();
-            GameManager.Instance.LoadNextScene();
-        }
-    }*/
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+    }
 }

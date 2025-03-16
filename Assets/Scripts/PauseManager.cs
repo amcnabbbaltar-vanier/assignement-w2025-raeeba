@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
     public static PauseManager Instance;
+    public static CharacterHealth characterHealth;
 
 
     void Start()
@@ -41,41 +42,49 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        // // show Pause Menu UI
-        // pauseMenuPanel.SetActive(true);
-        // // freeze game time
-        // Time.timeScale = 0f;
-        // isPaused = true;
-        if (pauseMenuPanel != null)
-        {
-            pauseMenuPanel.SetActive(true); // Show the pause menu
-            Time.timeScale = 0f; // Freeze the game time
-            isPaused = true;
-        }
-        else
-        {
-            Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
-        }
+        // show Pause Menu UI
+        pauseMenuPanel.SetActive(true);
+        // freeze game time
+        Time.timeScale = 0f;
+        isPaused = true;
+        // if (pauseMenuPanel != null)
+        // {
+        //     pauseMenuPanel.SetActive(true); // Show the pause menu
+        //     Time.timeScale = 0f; // Freeze the game time
+        //     isPaused = true;
+        // }
+        // else
+        // {
+        //     Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
+        // }
     }
 
     public void ResumeGame()
     {
-        // // hide Pause Menu UI
-        // pauseMenuPanel.SetActive(false);
-        // // unfreeze game time
-        // Time.timeScale = 1f;
-        // isPaused = false;
-        if (pauseMenuPanel != null)
-        {
-            pauseMenuPanel.SetActive(false); // Hide the pause menu
-            Time.timeScale = 1f; // Unfreeze the game time
-            isPaused = false;
-        }
-        else
-        {
-            Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
-        }
+        // hide Pause Menu UI
+        pauseMenuPanel.SetActive(false);
+        // unfreeze game time
+        Time.timeScale = 1f;
+        isPaused = false;
+        // if (pauseMenuPanel != null)
+        // {
+        //     pauseMenuPanel.SetActive(false); // Hide the pause menu
+        //     Time.timeScale = 1f; // Unfreeze the game time
+        //     isPaused = false;
+        // }
+        // else
+        // {
+        //     Debug.LogError("PauseMenuPanel is not assigned or has been destroyed!");
+        // }
     }
+
+    public void RestartLevel()
+    {
+        GameManager.Instance.ResetStats();
+        characterHealth.Instance.ResetHealth();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+    }
+
 
     public void QuitGame()
     {
