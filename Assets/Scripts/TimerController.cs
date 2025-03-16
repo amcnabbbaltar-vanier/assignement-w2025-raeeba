@@ -22,7 +22,7 @@ public class TimerController : MonoBehaviour
             
             if (GameManager.Instance != null)
             {
-                timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
+                timerText.text = GameManager.Instance.minuteCount.ToString("00") + "m"  + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00") + "s";
             }
                 else
             {
@@ -41,7 +41,7 @@ public class TimerController : MonoBehaviour
     {
         if (timerText != null)
         {
-            timerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
+            timerText.text = GameManager.Instance.minuteCount.ToString("00") + "m" + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00") + "s";
             //Debug.Log("Time was incremented in Timer Controller: " + timerText);
         }
         else

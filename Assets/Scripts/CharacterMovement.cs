@@ -181,7 +181,7 @@ public class CharacterMovement : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
                 jumpCount = 1;
             }
-            else if (jumpCount == 1 && canDoubleJump) // if player presses space bar twice and has JumpPickup, allow double jump
+            else if (jumpCount == 1 && canDoubleJump) 
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 jumpCount = 2;
@@ -249,7 +249,7 @@ public class CharacterMovement : MonoBehaviour
         else if (other.gameObject.tag == "Trap") // Red Traps reduce health by 1 point
         {
             characterHealth.TakeDamage(1);
-            Debug.Log("Trap touched");
+            //Debug.Log("Trap touched");
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Flag") // Flags being player to next level

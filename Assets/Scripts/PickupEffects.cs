@@ -36,13 +36,11 @@ public class PickupEffects : MonoBehaviour
     }
 
     // on collision with player, play particle effects
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.CompareTag("Player")) 
         {
             collisionEffect.Play();
-            //Debug.Log("Player collided with pickup!");
         }
     }
 }

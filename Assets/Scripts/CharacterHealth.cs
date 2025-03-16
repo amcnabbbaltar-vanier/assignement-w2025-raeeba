@@ -9,6 +9,7 @@ public class CharacterHealth : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
     public Slider healthBar;
+    public Vector3 startingPoint = new Vector3(0f, 1f, 0f);
     public CharacterHealth Instance;
 
     // Start is called before the first frame update
@@ -28,10 +29,12 @@ public class CharacterHealth : MonoBehaviour
         healthBar.value = currentHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position.y < -10f)  // check if player has fallen off the level
+        {
+            FellOffLevel();
+        }
     }
 
     public void ResetHealth()
@@ -47,6 +50,13 @@ public class CharacterHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void FellOffLevel()
+    {
+        transform.position = startingPoint; // reset player to their respawn point if they fell off the level
+        Die();
+        TakeDamage(1);
     }
 
     public void Die()

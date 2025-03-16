@@ -11,11 +11,6 @@ public class GameManager : MonoBehaviour
     public Canvas statsCanvas;
     public Canvas pauseMenuCanvas;
 
-    // // health
-    // public int maxHealth = 3;
-    // private int currentHealth;
-    // public Slider healthBar;
-
     // score
     public ScoreController scoreController;
     public int score;
@@ -27,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Camera playerCamera;
     public Cinemachine.CinemachineFreeLook freeLookCamera;
     private Transform playerTransform; 
+    public Vector3 startingPoint = new Vector3(0f, 1f, 0f);
 
     void Awake()
     {
@@ -69,6 +65,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        IncrementTimer(); // increment timer every frame
+    }
+
     // reset score and time
     public void ResetStats()
     {
@@ -76,13 +77,7 @@ public class GameManager : MonoBehaviour
         scoreController.UpdateScore(0); // update score ui
         minuteCount = 0;
         secondsCount = 0;
-        // currentHealth = maxHealth;
     }
-
-    void Update()
-    {
-        IncrementTimer(); // increment timer every frame
-    } 
 
     // increment time
     public void IncrementTimer()
@@ -108,28 +103,7 @@ public class GameManager : MonoBehaviour
         {
             score += 50;
             scoreController.UpdateScore(score);
-            Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
+            //Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
         }
-    }
-
-    // public void TakeDamage(int damage)
-    // {
-    //     currentHealth -= damage;
-    //     healthBar.value = currentHealth;
-    //     if(currentHealth <= 0)
-    //     {
-    //         Die();
-    //     }
-    // }
-
-    // public void Die()
-    // {
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
-    // }
-
-    // load the next scene
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

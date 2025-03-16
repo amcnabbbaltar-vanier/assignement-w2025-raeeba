@@ -15,8 +15,8 @@ public class GameOverController : MonoBehaviour
         gameOverPanel.SetActive(true); // make gameOver panel visible
         if (GameManager.Instance) 
         {
-            finalScoreText.text = "Score: " + GameManager.Instance.score.ToString();
-            finalTimerText.text = "M: " + GameManager.Instance.minuteCount.ToString("00") + " S: " + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00");
+            finalScoreText.text = "Final Score: " + GameManager.Instance.score.ToString();
+            finalTimerText.text = "Final Time: " + GameManager.Instance.minuteCount.ToString("00") + "m" + Mathf.FloorToInt(GameManager.Instance.secondsCount).ToString("00") + "s";
         }
     }
 

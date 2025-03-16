@@ -29,10 +29,13 @@ public class AnimatorController : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.Space) && characterMovement.jumpCount == 2)
         {
-            // Trigger the flip animation when the player double jumps
+            // play double jump animation with particle system
             animator.SetTrigger("doFlip");
             doubleJumpEffect.Play();
-            
+            if (characterMovement.IsGrounded)
+            {
+                characterMovement.jumpCount = 0; // reset double jump counter
+            }
         }
     }
 }
