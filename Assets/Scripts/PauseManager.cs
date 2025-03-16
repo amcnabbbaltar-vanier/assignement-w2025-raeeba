@@ -8,7 +8,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
     public static PauseManager Instance;
-    public static CharacterHealth characterHealth;
+    //public static CharacterHealth characterHealth;
 
 
     void Start()
@@ -81,7 +81,7 @@ public class PauseManager : MonoBehaviour
     public void RestartLevel()
     {
         GameManager.Instance.ResetStats();
-        characterHealth.Instance.ResetHealth();
+        //characterHealth.Instance.ResetHealth();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
     }
 

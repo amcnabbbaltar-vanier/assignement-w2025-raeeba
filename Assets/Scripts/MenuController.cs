@@ -16,8 +16,9 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void RestartGame()
+    /*public void RestartGame()
     {
+        GameManager.Instance.ResetStats();
         SceneManager.LoadScene("SampleScene"); 
-    }
+    }*/
 }

@@ -4974,4 +4974,4 @@ MonoBehaviour:
   hoverHeight: 0.5
   hoverSpeed: 1
   rotationSpeed: 50
-  collisionEffect: {fileID: 0}
+  collisionEffect: {fileID: 4868990714949511609}

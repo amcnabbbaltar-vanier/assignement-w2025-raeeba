@@ -35,7 +35,7 @@ public class ScoreController : MonoBehaviour
         
     }
 
-    public void UpdateScore()
+    public void UpdateScore(int score)
     {
         if (scoreText != null)
         {
@@ -46,11 +46,6 @@ public class ScoreController : MonoBehaviour
         {
             Debug.LogWarning("ScoreText is not assigned in ScoreController.");
         }
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(0);
     }
 }
 

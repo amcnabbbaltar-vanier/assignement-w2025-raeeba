@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     public Canvas statsCanvas;
     public Canvas pauseMenuCanvas;
 
+    // // health
+    // public int maxHealth = 3;
+    // private int currentHealth;
+    // public Slider healthBar;
+
     // score
     public ScoreController scoreController;
     public int score;
@@ -70,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-        void Start()
+    void Start()
     {
         // Optionally, reassign the target after loading the new scene
         if (freeLookCamera != null && playerTransform != null)
@@ -79,13 +84,19 @@ public class GameManager : MonoBehaviour
             freeLookCamera.Follow = playerTransform;
             freeLookCamera.LookAt = playerTransform;
         }
+
+        // currentHealth = maxHealth;
+        // healthBar.maxValue = maxHealth;
+        // healthBar.value = currentHealth;
     }
 
     public void ResetStats()
     {
         score = 0;
+        scoreController.UpdateScore(0); // update score ui
         minuteCount = 0;
         secondsCount = 0;
+        // currentHealth = maxHealth;
     }
 
     void Update()
@@ -114,10 +125,25 @@ public class GameManager : MonoBehaviour
         if(scoreController != null)
         {
             score += 50;
-            scoreController.UpdateScore();
+            scoreController.UpdateScore(score);
             Debug.Log("Score is being incremented in Game Manager. The score is: " + score);
         }
     }
+
+    // public void TakeDamage(int damage)
+    // {
+    //     currentHealth -= damage;
+    //     healthBar.value = currentHealth;
+    //     if(currentHealth <= 0)
+    //     {
+    //         Die();
+    //     }
+    // }
+
+    // public void Die()
+    // {
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+    // }
 
     public void LoadNextScene()
     {
